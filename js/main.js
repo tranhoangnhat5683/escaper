@@ -9,6 +9,7 @@ var KEYCODE_UP = 38;
 var KEYCODE_DOWN = 40;
 
 var SOUND_LOSE = 1;
+var SOUND_MOVE = SOUND_LOSE + 1;
 
 function init() {
     initStage();
@@ -19,6 +20,7 @@ function init() {
 
 function initSound () {
     createjs.Sound.registerSound("sound/lose.mp3", SOUND_LOSE);
+    createjs.Sound.registerSound("sound/move.mp3", SOUND_MOVE);
 }
 
 function initStage() {
@@ -146,15 +148,19 @@ function keyDownHandler(e)
     switch (e.keyCode)
     {
         case KEYCODE_LEFT:
+            createjs.Sound.play(SOUND_MOVE);
             moveTo(player.mapX - 1, player.mapY);
             break;
         case KEYCODE_RIGHT:
+            createjs.Sound.play(SOUND_MOVE);
             moveTo(player.mapX + 1, player.mapY);
             break;
         case KEYCODE_UP:
+            createjs.Sound.play(SOUND_MOVE);
             moveTo(player.mapX, player.mapY - 1);
             break;
         case KEYCODE_DOWN:
+            createjs.Sound.play(SOUND_MOVE);
             moveTo(player.mapX, player.mapY + 1);
             break;
     }
