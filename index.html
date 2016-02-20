@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+    </head>
+    <body onload="init();">
+        <canvas id="demoCanvas" width="500" height="300"></canvas>
+        <script>
+            var squareSize = 20;
+            var mapStage = [];
+            function init() {
+                var stage = new createjs.Stage("demoCanvas");
+
+                var player = new createjs.Shape();
+                player.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, squareSize - 5);
+                player.x = 20;
+                player.y = 20;
+                player.mapX = 0;
+                player.mapY = 0;
+                stage.addChild(player);
+                stage.update();
+
+                addColumn([1, 0, 1]);
+                addColumn([1, 1, 1]);
+                addColumn([0, 0, 1, 0, 1]);
+                addColumn([1, 0, 1, 1, 1]);
+                addColumn([1, 0, 0, 0, 1]);
+                addColumn([1, 1, 1, 0, 1]);
+                addColumn([1, 0, 1, 0, 1]);
+                addColumn([1, 1, 1, 1, 1]);
+                addColumn([0, 0, 0, 0, 1]);
+                addColumn([0, 0, 0, 0, 1]);
+
+                window.onkeydown = keyDownHandler;
+                createjs.Ticker.setFPS(60);
+
+                function keyDownHandler(e)
+                {
+                    KEYCODE_LEFT = 37,
+                    KEYCODE_RIGHT = 39,
+                    KEYCODE_UP = 38,
+                    KEYCODE_DOWN = 40.
+                    switch(e.keyCode)
+                    {
+                        case KEYCODE_LEFT:
+                            if (mapStage[player.mapX - 1] && mapStage[player.mapX - 1][player.mapY])
+                            {
+                                player.x -= squareSize * 2;
+                                player.mapX -= 1;
+                                stage.update();
+                            }
+                            break;
+                        case KEYCODE_RIGHT:
+                            if (mapStage[player.mapX + 1] && mapStage[player.mapX + 1][player.mapY])
+                            {
+                                player.x += squareSize * 2;
+                                player.mapX += 1;
+                                stage.update();
+                            }
+                            break;
+                        case KEYCODE_UP:
+                            if (mapStage[player.mapX][player.mapY - 1])
+                            {
+                                player.y -= squareSize * 2;
+                                player.mapY -= 1;
+                                stage.update();
+                            }
+                            break;
+                        case KEYCODE_DOWN:
+                            if (mapStage[player.mapX][player.mapY + 1])
+                            {
+                                player.y += squareSize * 2;
+                                player.mapY += 1;
+                                stage.update();
+                            }
+                            break;
+                    } 
+                }
+
+                function addColumn(column) {
+                    var square = null;
+                    for (var i = 0; i < column.length; i++)
+                    {
+                        if (!column[i])
+                        {
+                            continue;
+                        }
+
+                        square = new createjs.Shape();
+                        square.graphics.beginFill("Green").drawCircle(0, 0, squareSize);
+                        square.x = squareSize * (mapStage.length * 2 + 1);
+                        square.y = squareSize * (i * 2 + 1);
+                        stage.addChild(square);
+                    }
+
+                    stage.setChildIndex( player, stage.getNumChildren()-1);
+                    stage.update();
+
+                    mapStage.push(column);
+                }
+            }
+        </script>
+    </body>
+</html>
