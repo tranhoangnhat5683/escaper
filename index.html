@@ -11,18 +11,22 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
     </head>
-    <body onload="init();">
-        <canvas id="demoCanvas" width="500" height="300"></canvas>
+    <body onload="init();" style="background:black;">
+        <canvas id="demoCanvas" width="1000" height="500" style="margin:20px;"></canvas>
         <script>
             var squareSize = 20;
             var mapStage = [];
             function init() {
                 var stage = new createjs.Stage("demoCanvas");
 
-                var player = new createjs.Shape();
-                player.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, squareSize - 5);
-                player.x = 20;
-                player.y = 20;
+                // var player = new createjs.Shape();
+                // player.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, squareSize - 5);
+                var player = new createjs.Bitmap("img/player.png");
+                // player.image.width = 40;
+                player.scaleX = (squareSize * 2 / player.image.width);
+                player.scaleY = (squareSize * 2 / player.image.height);
+                player.x = 0;
+                player.y = 0;
                 player.mapX = 0;
                 player.mapY = 0;
                 stage.addChild(player);
@@ -37,10 +41,56 @@ and open the template in the editor.
                 addColumn([1, 0, 1, 0, 1]);
                 addColumn([1, 1, 1, 1, 1]);
                 addColumn([0, 0, 0, 0, 1]);
-                addColumn([0, 0, 0, 0, 1]);
+                addColumn([1, 1, 1, 1, 1]);
+                addColumn([1, 0, 0, 0, 1]);
+                addColumn([1, 0, 0, 0, 1]);
+                addColumn([1, 0, 0, 0, 1]);
+                addColumn([1, 1, 1, 1, 1]);
+                addColumn([0, 1, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 1]);
+                addColumn([0, 1, 0, 0, 1]);
+                addColumn([0, 1, 1, 1, 1, 1, 1, 1, 1]);
+                addColumn([0, 0, 0, 0, 0, 0, 0, 0, 1]);
+                addColumn([0, 1, 1, 1, 1, 1, 1, 1, 1]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+                addColumn([0, 1, 0, 0, 0, 0, 0, 0, 0]);
 
                 window.onkeydown = keyDownHandler;
-                createjs.Ticker.setFPS(60);
+                createjs.Ticker.setFPS(30);
+                createjs.Ticker.addEventListener("tick", handleTick);
+
+                function handleTick(event) {
+                    for (var x = 0; x < mapStage.length; x++)
+                    {
+                        for (var y = 0; y < mapStage[x].length; y++)
+                        {
+                            if (!mapStage[x][y])
+                            {
+                                continue;
+                            }
+
+                            mapStage[x][y].shape.x -= 1;
+                        }
+                    }
+
+                    player.x -= 1;
+
+                    stage.update();
+                }
 
                 function keyDownHandler(e)
                 {
@@ -87,10 +137,12 @@ and open the template in the editor.
 
                 function addColumn(column) {
                     var square = null;
+                    var _column = [];
                     for (var i = 0; i < column.length; i++)
                     {
                         if (!column[i])
                         {
+                            _column.push(null);
                             continue;
                         }
 
@@ -99,12 +151,15 @@ and open the template in the editor.
                         square.x = squareSize * (mapStage.length * 2 + 1);
                         square.y = squareSize * (i * 2 + 1);
                         stage.addChild(square);
+                        _column.push({
+                            shape: square
+                        })
                     }
 
                     stage.setChildIndex( player, stage.getNumChildren()-1);
                     stage.update();
 
-                    mapStage.push(column);
+                    mapStage.push(_column);
                 }
             }
         </script>
