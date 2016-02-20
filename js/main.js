@@ -8,10 +8,17 @@ var KEYCODE_RIGHT = 39;
 var KEYCODE_UP = 38;
 var KEYCODE_DOWN = 40;
 
+var SOUND_LOSE = 1;
+
 function init() {
     initStage();
     initPlayer();
     initEvent();
+    initSound();
+}
+
+function initSound () {
+    createjs.Sound.registerSound("sound/lose.mp3", SOUND_LOSE);
 }
 
 function initStage() {
@@ -83,6 +90,7 @@ function handleTick(event) {
     if (player.x < -squareSize)
     {
         createjs.Ticker.removeEventListener("tick", handleTick);
+        createjs.Sound.play(SOUND_LOSE);
         alert('You lose');
         return;
     }
