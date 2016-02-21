@@ -5,7 +5,9 @@ const db = low('db.json', { storage : storage });
 
 var express = require('express');
 var app = express();
+var cors = require('cors')
 
+app.use(cors());
 var bodyParser = require('body-parser');
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -13,12 +15,14 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 
 app.get('/score/:username', function(req, res){
-  const score = db('scores').find({ username: req.params.username })
-  res.send(score);
+  const scores = db('scores').filter({ username: req.params.username })
+  res.send(scores);
 });
  
 app.post('/score', function(req, res){
-  console.log(req.body);
+  var data = req.body;
+  data.score = parseInt(data.score);
+  
   db('scores')
     .push(req.body)
     .then(function(score){
