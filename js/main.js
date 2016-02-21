@@ -59,28 +59,28 @@ function initSound () {
 function initStage() {
     stage = new createjs.Stage("demoCanvas");
 
-    addStageColumn([0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);
-    addStageColumn([0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);
-    addStageColumn([0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);
-    addStageColumn([0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);
-    addStageColumn([0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);
-    addStageColumn([0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);
-    addStageColumn([0, 0, 0, 0, 0, 1, 1, 0, 0, 0]);
-    addStageColumn([0, 0, 0, 0, 0, 0, 1, 0, 0, 0]);
-    addStageColumn([0, 0, 0, 0, 1, 1, 1, 0, 0, 0]);
-    addStageColumn([0, 0, 0, 0, 1, 0, 0, 0, 0, 0]);
-    addStageColumn([0, 0, 0, 0, 1, 1, 1, 0, 0, 0]);
-    addStageColumn([0, 0, 0, 0, 1, 0, 1, 0, 0, 0]);
-    addStageColumn([1, 0, 1, 0, 1]);
-    addStageColumn([1, 0, 1, 1, 1]);
-    addStageColumn([1, 0, 0, 0, 1]);
-    addStageColumn([1, 1, 1, 0, 1]);
-    addStageColumn([1, 0, 1, 0, 1]);
-    addStageColumn([1, 1, 1, 1, 1]);
-    addStageColumn([0, 0, 0, 0, 1]);
-    addStageColumn([1, 1, 1, 1, 1]);
-    addStageColumn([1, 0, 0, 0, 1]);
-    addStageColumn([1, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1]);
+    addStageColumn([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
 }
 
 function initPlayer() {
@@ -90,8 +90,8 @@ function initPlayer() {
     // player.scaleX = (squareSize * 2 / player.image.width);
     // player.scaleY = (squareSize * 2 / player.image.height);
     // @TODO: set place from mapStage.
-    player.mapX = 3;
-    player.mapY = 5;
+    player.mapX = 8;
+    player.mapY = 15;
     player.x = squareSize * (player.mapX * 2 + 1);
     player.y = squareSize * (player.mapY * 2 + 1);
     stage.addChild(player);
