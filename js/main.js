@@ -1,3 +1,4 @@
+var STORAGE_URL = 'http://161.202.234.16:3000';
 var STATE_MENU = 0;
 var STATE_PLAY = 1;
 var STATE_OVER = 2;
@@ -45,6 +46,14 @@ function gameover()
 {
     game_state = STATE_OVER;
     createjs.Sound.play(SOUND_LOSE);
+    
+    $.post(STORAGE_URL+'/score',{
+        'username'  : 'player_' + ((Math.random() * 100 + 1) | 0),
+        'score'     : score,
+        'created_at': new Date().toISOString()
+    },function(data){
+        console.log('Save data: ', data);
+    });
 
     $('#game_menu').hide();
     $('#game_over').show();
