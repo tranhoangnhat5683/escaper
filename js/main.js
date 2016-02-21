@@ -50,6 +50,30 @@ function gameover()
     $('#game_menu').hide();
     $('#game_over').show();
     $('#game_play').hide();
+    
+    showTopPlayers();
+}
+
+function showTopPlayers(){
+    var html = [];
+    html.push('<table>');
+    html.push('<tr>');
+        html.push('<th>Player</th>');
+        html.push('<th>Date</th>');
+        html.push('<th>Score</th>');
+    html.push('</tr>');
+    $.get(STORAGE_URL+'/score/top',{
+    },function(data){
+        data.forEach(function(row){
+            html.push('<tr>');
+                html.push('<td>'+row.username+'</td>');
+                html.push('<td>'+row.created_at+'</td>');
+                html.push('<td>'+row.score+'</td>');
+            html.push('</tr>');    
+        });
+        html.push('</table>');
+        $('#top_players .container').html(html.join(''));
+    });
 }
 
 function saveGame(){
@@ -61,7 +85,7 @@ function saveGame(){
     },function(data){
         console.log('Save data: ', data);
     });
-};
+}
 
 function initSound () {
     createjs.Sound.registerSound("sound/lose.mp3", SOUND_LOSE);

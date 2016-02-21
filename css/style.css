@@ -20,6 +20,15 @@
 #game_play {
     text-align: center;
 }
+
+#top_players{
+    text-align: center;
+    color: white;
+}
+#top_players table{
+    margin-left: auto;
+    margin-right: auto;
+}
 @keyframes example {
   0% {
     color: lime;

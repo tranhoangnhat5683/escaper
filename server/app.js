@@ -14,6 +14,16 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 
+app.get('/score/top', function(req, res){
+    var top = db('scores')
+      .chain()
+      .sortBy('score')
+      .reverse()
+      .take(10)
+      .value();
+    res.send(top);
+});
+
 app.get('/score/:username', function(req, res){
   const scores = db('scores').filter({ username: req.params.username })
   res.send(scores);
@@ -30,6 +40,7 @@ app.post('/score', function(req, res){
     });
 });
 
+  
 app.listen(3000, function () {
   console.log('Server is listening on port 3000!');
 });
