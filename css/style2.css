@@ -3,68 +3,76 @@
             ::selection {color:#FFFFFF; background:transparent;}
             ::-moz-selection {color:#FFFFFF; background:transparent;}
             
-            *{
+            #game_menu *{
                 margin: 0;
                 padding: 0;
                 font-family: "VT323";
             }
-            body{
+            #game_menu body{
                 background-color: #000000;
             }
-            .wrap{
+            #game_menu .wrap{
                 margin-left: auto;
                 margin-right: auto;
             }
-            header{
+            #game_menu header{
                 width: 340px;
                 font-size: 0;
             }
-            canvas{
+            #game_menu canvas{
                 display: none;
                 border-style: solid;
                 border-width: 10px;
                 border-color: #FFFFFF;
             }
-            canvas:focus{
+            #game_menu canvas:focus{
                 outline: none;
             }
             
             /* Top Styles */
-            h1{
+            #game_menu h1{
                 display: inline-block;
                 width: 100px;
                 font-size: 32px;
                 color: #FFFFFF;
             }
-            .score{
+            #game_menu .score{
                 display: inline-block;
                 width: 240px;
                 font-size: 20px;
                 color: #FFFFFF;
                 text-align: right;
             }
-            .score_value{
+            #game_menu .score_value{
                 font-size: inherit;
             }
             
-            
+            #game_menu canvas{
+                display: none;
+                border-style: solid;
+                border-width: 10px;
+                border-color: #FFFFFF;
+            }
+            #game_menu canvas:focus{
+                outline: none;
+            }
             
             /* All screens style */
-            #gameover a, #setting a, #menu a{
+            #game_menu #gameover a, #setting a, #menu a{
                 display: block;
             }
        
-            #gameover a, #setting a:hover, #menu a:hover{
+            #game_menu #gameover a, #setting a:hover, #menu a:hover{
                 cursor: pointer;
             }
             
-            #gameover a:hover::before, #setting a:hover::before, #menu a:hover::before{
+            #game_menu #gameover a:hover::before, #setting a:hover::before, #menu a:hover::before{
                 content: ">";
                 margin-right: 10px;
             }
             
             /* Menu Screen Style */
-            #menu{
+            #game_menu #menu{
                 display: block;
                 width: 340px;
                 padding-top: 95px;
@@ -76,14 +84,14 @@
                 color: #FFF;
             }
             
-            #menu h2{
+            #game_menu #menu h2{
                 -webkit-animation: logo-ani 1000ms linear infinite;
                         animation: logo-ani 1000ms linear infinite;
                 margin-bottom: 30px;
                 
             }
             
-            #menu a{
+            #game_menu #menu a{
                 font-size: 30px;
             }
             
@@ -100,7 +108,7 @@
             
             /* Game Over Screen Style */
             
-            #gameover{
+            #game_menu #gameover{
                 display: none;
                 width: 340px;
                 padding-top: 95px;
@@ -112,13 +120,13 @@
                 color: #FFF;
             }
             
-            #gameover p{
+            #game_menu #gameover p{
                 margin-top: 25px;
                 font-size: 20px;
             }
             
             /* Settings Screen Style */
-            #setting{
+            #game_menu #setting{
                 display: none;
                 width: 340px;
                 margin-left: auto;
@@ -130,23 +138,23 @@
                 text-align: center;
             }
             
-            #setting h2{
+            #game_menu #setting h2{
                 margin-bottom: 15px;
             }
             
-            #setting p{
+            #game_menu #setting p{
                 margin-top: 10px;
             }
             
-            #setting input{
+            #game_menu #setting input{
                 display:none;
             }
             
-            #setting label{
+            #game_menu #setting label{
                 cursor: pointer;
             }
             
-            #setting input:checked + label{
+            #game_menu #setting input:checked + label{
                 background-color: #FFF;
                 color: #000;
             }

@@ -1,3 +1,13 @@
+var STATE_MENU = 0;
+var STATE_PLAY = 1;
+var STATE_OVER = 2;
+
+var KEYCODE_LEFT = 37;
+var KEYCODE_RIGHT = 39;
+var KEYCODE_UP = 38;
+var KEYCODE_DOWN = 40;
+
+var game_state = STATE_MENU;
 var score = 0;
 var squareSize = 8;
 var playerSize = 6
@@ -8,19 +18,37 @@ var stage = null;
 var player = null;
 var onAddNewStageFlag = false;
 
-var KEYCODE_LEFT = 37;
-var KEYCODE_RIGHT = 39;
-var KEYCODE_UP = 38;
-var KEYCODE_DOWN = 40;
-
 var SOUND_LOSE = 1;
 var SOUND_MOVE = SOUND_LOSE + 1;
 
-function init() {
-    initStage();
-    initPlayer();
+function initOnce()
+{
     initEvent();
     initSound();
+}
+
+function newGame()
+{
+    game_state = STATE_PLAY;
+
+    $('#game_menu').hide();
+    $('#game_over').hide();
+    $('#game_play').show();
+    score = 0;
+    mapStage = [];
+    onAddNewStageFlag = false;
+    initStage();
+    initPlayer();
+}
+
+function gameover()
+{
+    game_state = STATE_OVER;
+    createjs.Sound.play(SOUND_LOSE);
+
+    $('#game_menu').hide();
+    $('#game_over').show();
+    $('#game_play').hide();
 }
 
 function initSound () {
@@ -77,42 +105,45 @@ function initEvent() {
 }
 
 function handleTick(event) {
-    $('#score').text(score);
-    player.x -= 1;
-
-    if (player.x < -squareSize)
+    switch (game_state)
     {
-        createjs.Ticker.removeEventListener("tick", handleTick);
-        createjs.Sound.play(SOUND_LOSE);
-        alert('You lose');
-        return;
-    }
-
-    for (var x = 0; x < mapStage.length; x++)
-    {
-        for (var y = 0; y < mapStage[x].length; y++)
-        {
-            if (!mapStage[x][y])
+        case STATE_PLAY:
+            $('.score').text(score);
+            player.x -= 1;
+        
+            if (player.x < -squareSize)
             {
-                continue;
+                gameover();
+                return;
             }
-
-            // Logic cho nay co the bi sai, trong truong hop nguyen row khong co square nao.
-            mapStage[x][y].shape.x -= 1;
-            if (mapStage[x][y].shape.x < 0) // gia tri cho nay cung do square dung circle luon.
+        
+            for (var x = 0; x < mapStage.length; x++)
             {
-                removeNFirstColumnOfStage(x + 1);
-                x--; // reduce to retry with first row;
-                if (mapStage.length < 100)
+                for (var y = 0; y < mapStage[x].length; y++)
                 {
-                    createMoreStage();
+                    if (!mapStage[x][y])
+                    {
+                        continue;
+                    }
+        
+                    // Logic cho nay co the bi sai, trong truong hop nguyen row khong co square nao.
+                    mapStage[x][y].shape.x -= 1;
+                    if (mapStage[x][y].shape.x < 0) // gia tri cho nay cung do square dung circle luon.
+                    {
+                        removeNFirstColumnOfStage(x + 1);
+                        x--; // reduce to retry with first row;
+                        if (mapStage.length < 100)
+                        {
+                            createMoreStage();
+                        }
+                        break;
+                    }
                 }
-                break;
             }
-        }
+        
+            stage.update();
+            break;
     }
-
-    stage.update();
 }
 
 function removeNFirstColumnOfStage(n) {
@@ -198,24 +229,29 @@ function createConnectionWithNewStage(lab_txt)
 
 function keyDownHandler(e)
 {
-    switch (e.keyCode)
+    switch (game_state)
     {
-        case KEYCODE_LEFT:
-            createjs.Sound.play(SOUND_MOVE);
-            moveTo(player.mapX - 1, player.mapY, score - 1);
-            break;
-        case KEYCODE_RIGHT:
-            createjs.Sound.play(SOUND_MOVE);
-            moveTo(player.mapX + 1, player.mapY, score + 1);
-            break;
-        case KEYCODE_UP:
-            createjs.Sound.play(SOUND_MOVE);
-            moveTo(player.mapX, player.mapY - 1, score);
-            break;
-        case KEYCODE_DOWN:
-            createjs.Sound.play(SOUND_MOVE);
-            moveTo(player.mapX, player.mapY + 1, score);
-            break;
+        case STATE_PLAY:
+        switch (e.keyCode)
+        {
+            case KEYCODE_LEFT:
+                createjs.Sound.play(SOUND_MOVE);
+                moveTo(player.mapX - 1, player.mapY, score - 1);
+                break;
+            case KEYCODE_RIGHT:
+                createjs.Sound.play(SOUND_MOVE);
+                moveTo(player.mapX + 1, player.mapY, score + 1);
+                break;
+            case KEYCODE_UP:
+                createjs.Sound.play(SOUND_MOVE);
+                moveTo(player.mapX, player.mapY - 1, score);
+                break;
+            case KEYCODE_DOWN:
+                createjs.Sound.play(SOUND_MOVE);
+                moveTo(player.mapX, player.mapY + 1, score);
+                break;
+        }
+        break;
     }
 }
 

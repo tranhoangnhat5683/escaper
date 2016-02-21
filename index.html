@@ -1,27 +1,45 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-Credit:
-Sound: http://www.freesound.org/
--->
+
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Escaper</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
         <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
         <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <link rel="stylesheet" href="/css/style2.css" type="text/css" media="all" />
+        <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
         <script src="js/main.js"></script>
         <script src="js/labyrinth.js"></script>
     </head>
-    <body onload="init();" style="background:black;">
-        <div id="score" style="color:white;">0</div>
-        <canvas id="demoCanvas" width="1000" height="500" style="margin:20px;"></canvas>
-        <script>
-            
-        </script>
+    <body onload="initOnce();" style="background:black;">
+        <div id="game_menu">
+            <header class="wrap">
+                <h1>Escaper</h1>
+                <p class="score">Score: <span id="score_value">0</span></p>
+            </header>
+            <canvas class="wrap" id="snake" width="320" height="320" tabindex="1"></canvas>
+        
+            <!-- Main Menu Screen -->
+            <div id="menu">
+                <h2>Escaper</h2>
+                <a id="newgame_menu" onclick="newGame()">new game</a>
+                <a id="setting_menu">info</a>
+            </div>
+        </div>
+        <div id="game_play" style="display:none;">
+            <div class="score" style="color:white;">0</div>
+            <canvas id="demoCanvas" width="1000" height="500" style="margin:20px;"></canvas>
+        </div>
+        <div id="game_over" style="display:none;">
+            <p>GAME OVER</p>
+            <button onclick="newGame();">New game</button>
+            <button>Info</button>
+            <input type="text" placeholder="Your name">
+            <div class="score" style="color:white;">0</div>
+            <button>Save</button>
+        </div>
     </body>
 </html>
