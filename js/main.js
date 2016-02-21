@@ -46,19 +46,22 @@ function gameover()
 {
     game_state = STATE_OVER;
     createjs.Sound.play(SOUND_LOSE);
-    
-    $.post(STORAGE_URL+'/score',{
-        'username'  : 'player_' + ((Math.random() * 100 + 1) | 0),
-        'score'     : score,
-        'created_at': new Date().toISOString()
-    },function(data){
-        console.log('Save data: ', data);
-    });
 
     $('#game_menu').hide();
     $('#game_over').show();
     $('#game_play').hide();
 }
+
+function saveGame(){
+    var playerName = $('#player_name').val();
+    $.post(STORAGE_URL+'/score',{
+        'username'  : playerName,
+        'score'     : score,
+        'created_at': new Date().toISOString()
+    },function(data){
+        console.log('Save data: ', data);
+    });
+};
 
 function initSound () {
     createjs.Sound.registerSound("sound/lose.mp3", SOUND_LOSE);

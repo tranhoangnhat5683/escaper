@@ -35,11 +35,15 @@
         </div>
         <div id="game_over" style="display:none;">
             <p>GAME OVER</p>
-            <button onclick="newGame();">New game</button>
-            <button>Info</button>
-            <input type="text" placeholder="Your name">
-            <div class="score" style="color:white;">0</div>
-            <button>Save</button>
+            <div>
+                <button>Info</button>
+                <button onclick="newGame();">New game</button>
+            </div>
+            <div>
+                <input id="player_name" type="text" placeholder="Your name">
+                <div class="score" style="color:white;">0</div>
+                <button onclick="saveGame()">Save</button>
+            </div>
         </div>
     </body>
 </html>
