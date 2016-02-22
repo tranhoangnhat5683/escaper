@@ -49,6 +49,7 @@ function gameover()
 
     $('#game_menu').hide();
     $('#game_over').show();
+    $('#save_game').show();
     $('#game_play').hide();
     
     showTopPlayers();
@@ -78,12 +79,19 @@ function showTopPlayers(){
 
 function saveGame(){
     var playerName = $('#player_name').val();
+    if (!playerName)
+    {
+        return;
+    }
+
+    $('#save_game').hide();
     $.post(STORAGE_URL+'/score',{
         'username'  : playerName,
         'score'     : score,
         'created_at': new Date().toISOString()
     },function(data){
         console.log('Save data: ', data);
+        showTopPlayers();
     });
 }
 
@@ -235,7 +243,6 @@ function createConnectionWithNewStage(lab_txt)
     var connection = [];
     var out = random1FromArray(mapStage[last]);
 
-    console.log(out, lab_txt[0]);
     for (i = out; i >= 0; i--)
     {
         if (lab_txt[0][i])
