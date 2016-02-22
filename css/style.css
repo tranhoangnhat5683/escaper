@@ -4,6 +4,10 @@
   background: black;
 }
 
+#game_over{
+    text-align: center;
+}
+
 #game_over p {
   font-family: "VT323";
   font-size: 8em;
@@ -13,6 +17,18 @@
   animation-iteration-count: infinite;
 }
 
+#game_play {
+    text-align: center;
+}
+
+#top_players{
+    text-align: center;
+    color: white;
+}
+#top_players table{
+    margin-left: auto;
+    margin-right: auto;
+}
 @keyframes example {
   0% {
     color: lime;
